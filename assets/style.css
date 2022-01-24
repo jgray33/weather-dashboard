@@ -1,3 +1,11 @@
+* {
+    font-size: 16px;
+}
+
+.card-body{
+    font-size: 2em;
+}
+
 .container{
     background-color: red;
 }
@@ -6,12 +14,16 @@
     background-color: salmon;
     padding: 1rem;
     border: 2px black solid;
-   
+       
 }
 
 .col {
     background-color: blue;
     color: white;
-   
+    display: inline;
+       }
+
+.list{
+   list-style: none; 
 }
 

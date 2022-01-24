@@ -1,5 +1,5 @@
 * {
-    font-size: 16px;
+    font-size: 8px;
 }
 
 .card-body{
@@ -26,4 +26,15 @@
 .list{
    list-style: none; 
 }
+
+
+.box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100px;
+    margin: auto;
+    padding-top: 5px;
+}
+
 

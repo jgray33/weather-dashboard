@@ -1,0 +1,17 @@
+.container{
+    background-color: red;
+}
+
+.row {
+    background-color: salmon;
+    padding: 1rem;
+    border: 2px black solid;
+   
+}
+
+.col {
+    background-color: blue;
+    color: white;
+   
+}
+

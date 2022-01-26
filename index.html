@@ -14,27 +14,39 @@
 </head>
 
 <body>
+
+  <!-- Title -->
   <div class="container">
     <div class="row"> Weather app</div>
     <div class="row">
 
       <!-- Search Box -->
-      
       <div class="col col-sm-2 col-12">
-      <div class="box d-flex">
-                <p > Search for a city</p>
-        <input type="search">
-        <input type="submit" value="search"> 
-        </div>
-        </div>
-      
-    
+        <div class="box d-flex">
+          <p> Search for a city</p>
+          <input id="search" type="search" type="text" value="">
+          <input type="button" onClick=saveValue() value="search">
+                  </div>
+                <p> City list</p>
+                <p> City list</p>
+                <p> City list</p>
+                <p> City list</p>
+                <p> City list</p>
+                <p> City list</p>
+      </div>
 
-
-
-
-      <div class="col col-sm-10 col-12"> Another
-
+<!-- Big weather box -->
+      <div class="col col-sm-10 col-12">
+        <p>
+        <ul class="list">
+          <li>date </li>
+          <li> icon </li>
+          <li>temperature</li>
+          <li>humidity</li>
+          <li>wind speed</li>
+          <li>UV index</li>
+        </ul>
+        </p>
         <!-- Weather Day -->
         <div class="row">
           <!-- Day 1 -->
@@ -104,9 +116,9 @@
           </div>
         </div>
       </div>
-
-
     </div>
+
+    <!-- Search Bar -->
     <div class="row">
       <div class="col">Search Bar</div>
     </div>
@@ -115,5 +127,7 @@
 
 
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="assets/style.js"></script>
 </html>

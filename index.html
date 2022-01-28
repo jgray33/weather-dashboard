@@ -26,7 +26,7 @@
       <div class="col col-sm-2 col-12">
         <div class="box d-flex">
           <p> Search for a city</p>
-          <input id="search" type="search" type="text" value="">
+          <input id="search" placeholder="Enter a city" type="text" class="inputValue">
           <input type="button" onClick=saveValue() value="search">
         </div>
         <p> City list</p>
@@ -42,10 +42,10 @@
         <p>
         <ul class="list">
           <li> </li>
-          <li id="today"> </li>
+          <li> Today <br> <ins id="today"></ins></li>
           <li> <div id="icon"><img id="wicon" src="" alt="Weather icon"></div></li>
           <li><ins id="0descript"></ins></li>
-          <li>Temperature: <ins id="0temp"></ins></li>
+          <li>Temperature: <ins id="0temp"></ins> &#176C</li>
           <li>Humidity: <ins id ="0humid"></ins></li>
           <li>Wind Speed: <ins id="0ws"></ins> MPH</li>
           <li id="0uvi"></li>

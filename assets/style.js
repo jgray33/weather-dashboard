@@ -5,12 +5,32 @@ let city = search.value
 
 
 
+// Time ---------------------
+let currentTime = moment();
+let todayDate = currentTime.format("DD-MM-YY")
+let tomorrowDate = moment().add(1, "days").format("DD-MM-YY")
+
+console.log(tomorrowDate)
+
+
+
+$("#today").text(todayDate)
+$("#tomorrow").text(tomorrowDate)
+
+
+
+
 // Saves the city the user has input into local storage ----------------------
 let saveValue = () => {
     localStorage.setItem("City", search.value)
 }
 
 let cityName = "Birmingham"
+
+// Add dates into the boxes ---------------------------------------------------
+let loadDates = () => {
+
+}
 
 
 function getApi() {
@@ -19,7 +39,7 @@ function getApi() {
     .then(function(response) {
         return response.json();
     }).then(function(data) {
-        console.log(data)
+        console.log(data.main)
     })}
 
 getApi()

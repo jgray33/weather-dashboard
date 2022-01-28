@@ -17,6 +17,9 @@
        
 }
 
+ins {
+    text-decoration: none;
+  }
 .col {
     background-color: blue;
     color: white;

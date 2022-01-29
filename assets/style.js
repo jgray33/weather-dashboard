@@ -132,14 +132,10 @@ async function getApi(index) {
     $("#0ws").text(data.list[index].wind.speed)
        }
 
-getApi(0)
-getApi(8)
-getApi(16)
-getApi(24)
-getApi(32)
-    // Count is every three hours - we need every eight 
-
-// for (let i = 0; i < 10; i++) {
-//     getApi(i)    
-// }
+// Retrieves API data in 24 hour periods ------------------------
+// Count is every three hours - we need every eight 
+countArray = [0,8,16,24,32]
+for (let i = 0; i < countArray.length; i++) {
+    getApi(countArray[i])    
+}
 

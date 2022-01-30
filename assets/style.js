@@ -5,7 +5,6 @@ let city = search.value
 
 // Time ---------------------
 let currentTime = moment();
-let currentTimeUnix = moment()
 
 
 let todayDate = currentTime.format("DD-MM-YY")
@@ -14,8 +13,13 @@ let tomorrowDate = moment().add(1, "days").format("DD-MM-YY")
 let tomorrowDay = moment().add(1, "days").format("dddd")
 let dateAddTwo = moment().add(2, "days").format("DD-MM-YY")
 let dayAddTwo = moment().add(2,"days").format("dddd")
+let dateAddThree = moment().add(3,"days").format("DD-MM-YY")
+let dayAddThree = moment().add(3, "days").format("dddd")
+let dateAddFour = moment().add(4,"days").format("DD-MM-YY")
+let dayAddFour = moment().add(4,"days").format("dddd")
+let dateAddFive = moment().add(5,"days").format("DD-MM-YY")
+let dayAddFive = moment().add(5,"days").format("dddd")
 
-console.log(tomorrowDay)
 
 
 $("#today").text(todayDate)
@@ -23,7 +27,12 @@ $("#tomorrow").text(tomorrowDate)
 $("#tomorrowday").text(tomorrowDay)
 $("#dateAddTwo").text(dateAddTwo)
 $("#dayAddTwo").text(dayAddTwo)
-
+$("#dateAddThree").text(dateAddThree)
+$("#dayAddThree").text(dayAddThree)
+$("#dateAddFour").text(dateAddFour)
+$("#dayAddFour").text(dayAddFour)
+$("#dateAddFive").text(dateAddFive)
+$("#dayAddFive").text(dayAddFive)
 
 
 
@@ -49,8 +58,6 @@ let inputValue = document.querySelector(".inputValue")
 // how to get the five day 
 // Get the text input from the search and save it to local storage 
 
-
-// Render #
 
 async function getTodayWeather() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
@@ -142,25 +149,24 @@ async function getDayFiveWeather() {
     $("4ws").text(windSpeed)
 }
 
+
 async function getDaySixWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=50`
+    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
     const response = await fetch(requestUrl)
     const data = await response.json()
-    console.log(data.list[40].dt_txt)
-    let iconcode = (data.list[40].weather[0].icon)
+    console.log(data.list[39].dt_txt)
+    let iconcode = (data.list[39].weather[0].icon)
     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[40].weather[0].description
-    let temperature = (Math.floor(data.list[40].main.temp))
-    let humidity = data.list[40].main.humidity
-    let windSpeed = data.list[40].wind.speed
+    let weatherDescription = data.list[39].weather[0].description
+    let temperature = (Math.floor(data.list[39].main.temp))
+    let humidity = data.list[39].main.humidity
+    let windSpeed = data.list[39].wind.speed
     $("#5wicon").attr("src", iconUrl)
     $("#5descript").text(weatherDescription)
     $("#5temp").text(temperature) 
     $("#5humid").text(humidity) 
     $("5ws").text(windSpeed)
 }
-
-
 
 getTodayWeather()
 getTomorrowWeather()
@@ -177,4 +183,6 @@ getDaySixWeather()
 // for (let i = 0; i < countArray.length; i++) {
 //     getApi(countArray[i])    
 // }
+
+
 

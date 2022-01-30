@@ -1,9 +1,3 @@
-const search = document.getElementById("search")
-
-let city = search.value
-let cityInput = $("#search").val()
-console.log(cityInput)
-
 
 // Time ---------------------
 let currentTime = moment();
@@ -40,17 +34,42 @@ $("#dayAddFive").text(dayAddFive)
 
 
 
+
+
+
 // Saves the city the user has input into local storage ----------------------
-let saveValue = () => {
-    localStorage.setItem("City", search.value)
+function saveValue() {
+    let searchHistory = ["Birmingham", "Coventry"];
+localStorage.setItem("City", JSON.stringify(searchHistory))
+let cityData = $("search").val()
+
+searchHistory= localStorage.getItem("City")
+console.log(searchHistory)
 }
 
-let userCity = localStorage.getItem("City")
-console.log(userCity)
+        if (localStorage.getItem("city") == null){
+        localStorage.setItem("city", "[]")
+
+    // }
+    // searchHistory = JSON.parse(localStorage.getItem("city"))
+    //     let cityData = $("#search").val()
+    //     searchHistory.push(cityData)
+    //     localStorage.setItem("city", JSON.stringify(searchHistory))
+
+
+//     searchHistory = localStorage.getItem("city")
+// searchHistory.push(cityData)
+
+
+
+
+  
+}
+
+
 
 let cityName = "London"
 
-let inputValue = document.querySelector(".inputValue")
 
 
 // To do
@@ -60,6 +79,21 @@ let inputValue = document.querySelector(".inputValue")
 // how to get the five day 
 // Get the text input from the search and save it to local storage 
 
+
+// Get the lat long data from the 5 day call
+async function getLongLat() {
+    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+    const response = await fetch(requestUrl)
+    const data = await response.json()
+    let lat = data.city.coord.lat
+    let lon = data.city.coord.lon
+    
+    localStorage.setItem("lat", lat)
+    localStorage.setItem("lon", lon)
+    
+}
+
+getLongLat()
 
 async function getTodayWeather() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`

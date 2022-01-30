@@ -1,30 +1,20 @@
 * {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .card-body{
-    font-size: 2em;
+    font-size: 10em;
 }
 
-.container{
-    background-color: red;
-}
 
-.row {
-    background-color: salmon;
-    padding: 1rem;
-    border: 2px black solid;
-       
-}
+
+
 
 ins {
     text-decoration: none;
   }
-.col {
-    background-color: blue;
-    color: white;
-    display: inline;
-       }
+
+
 
 .list{
    list-style: none; 

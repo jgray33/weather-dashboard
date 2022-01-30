@@ -14,7 +14,6 @@ let dayAddFour = moment().add(4,"days").format("dddd")
 let dateAddFive = moment().add(5,"days").format("DD-MM-YY")
 let dayAddFive = moment().add(5,"days").format("dddd")
 
-let cityName = "Birmingham,GB"
 
 $("#today").text(todayDate)
 $("#tomorrow").text(tomorrowDate)
@@ -28,9 +27,9 @@ $("#dayAddFour").text(dayAddFour)
 $("#dateAddFive").text(dateAddFive)
 $("#dayAddFive").text(dayAddFive)
 
+let cityName = "london"
 
 // Saves the city the user has input into local storage ----------------------
-
 $("#searchForCity").click(searchForCity)
 function searchForCity(e) {
     console.log("button clicked")
@@ -39,35 +38,13 @@ function searchForCity(e) {
     localStorage.setItem("UserSearch", cityName)
     console.log(cityName)
     getLongLat()
+    getUV()
 }
 
-
        
-    
-//        let searchHistory = ["Birmingham", "Coventry"];
-// localStorage.setItem("City", JSON.stringify(searchHistory))
-
-// searchHistory= localStorage.getItem("City")
-// console.log(searchHistory)
-// }
-
-//         if (localStorage.getItem("city") == null){
-//         localStorage.setItem("city", "[]")
-//         }
-    
-    // searchHistory = JSON.parse(localStorage.getItem("city"))
-    //     let cityData = $("#search").val()
-    //     searchHistory.push(cityData)
-    //     localStorage.setItem("city", JSON.stringify(searchHistory))
-
-
-//     searchHistory = localStorage.getItem("city")
-// searchHistory.push(cityData)
-
-
-
 // Get the lat long data and store in local storage 
 async function getLongLat() {
+    let cityName = localStorage.getItem("UserSearch")
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
     const response = await fetch(requestUrl)
     const data = await response.json()
@@ -77,9 +54,11 @@ async function getLongLat() {
     localStorage.setItem("lon", lon)
     $("#cityName").text(data.city.name + ", " + data.city.country)
        console.log(data)
+    let iconcode = (data.list[0].weather[0].icon)
+    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+    $("#0wicon").attr("src", iconUrl)
+    console.log(iconcode)
     }
-
-
 
 let cityLat = localStorage.getItem("lat")
 let cityLon = localStorage.getItem("lon")
@@ -104,10 +83,6 @@ async function getUV() {
     console.log(data.current.uvi)
     }
 }
-
-
-
-getUV()
 
 async function getTodayWeather() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`

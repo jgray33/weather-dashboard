@@ -80,20 +80,46 @@ let cityName = "London"
 // Get the text input from the search and save it to local storage 
 
 
-// Get the lat long data from the 5 day call
+// Get the lat long data and store in local storage 
 async function getLongLat() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
     const response = await fetch(requestUrl)
     const data = await response.json()
     let lat = data.city.coord.lat
     let lon = data.city.coord.lon
-    
     localStorage.setItem("lat", lat)
     localStorage.setItem("lon", lon)
-    
-}
-
+    console.log(data)
+    }
 getLongLat()
+
+let cityLat = localStorage.getItem("lat")
+let cityLon = localStorage.getItem("lon")
+console.log(cityLat)
+console.log(cityLon)
+
+// Using OneCall 
+async function getUV() {
+    let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=f7709e138c9db02bf881e5c64600209b`
+    const response = await fetch(requestUrl)
+    const data = await response.json()
+    console.log(data)
+    let uvi = data.current.uvi
+    $("#UV").text(uvi)
+    if ( uvi <= 2) {
+        $("#UV").addClass("favorable")
+    } else if (uvi <= 5) {
+        $("#UV").addClass("moderate")
+    } else if (uvi > 5) {
+        $("#UV").addClass("severe")
+    console.log(data.current.uvi)
+    }
+}
+    // Favorable = 0 - 2
+    // Moderate = 3 - 5
+    // Sever = 5 above  
+
+getUV()
 
 async function getTodayWeather() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`

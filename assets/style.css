@@ -40,4 +40,18 @@ ins {
     padding-top: 5px;
 }
 
+.favorable{
+    background-color: green;
+    color: white;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.severe {
+    background-color: red;
+    color: white
+}
+
 

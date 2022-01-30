@@ -1,6 +1,8 @@
 const search = document.getElementById("search")
 
 let city = search.value
+let cityInput = $("#search").val()
+console.log(cityInput)
 
 
 // Time ---------------------
@@ -128,7 +130,7 @@ async function getDayFourWeather() {
     $("#3descript").text(weatherDescription)
     $("#3temp").text(temperature) 
     $("#3humid").text(humidity) 
-    $("3ws").text(windSpeed)
+    $("#3ws").text(windSpeed)
 }
 
 async function getDayFiveWeather() {
@@ -146,7 +148,8 @@ async function getDayFiveWeather() {
     $("#4descript").text(weatherDescription)
     $("#4temp").text(temperature) 
     $("#4humid").text(humidity) 
-    $("4ws").text(windSpeed)
+    $("#4ws").text(windSpeed)
+    console.log(windSpeed)
 }
 
 
@@ -165,7 +168,7 @@ async function getDaySixWeather() {
     $("#5descript").text(weatherDescription)
     $("#5temp").text(temperature) 
     $("#5humid").text(humidity) 
-    $("5ws").text(windSpeed)
+    $("#5ws").text(windSpeed)
 }
 
 getTodayWeather()

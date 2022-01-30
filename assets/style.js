@@ -1,8 +1,6 @@
 
 // Time ---------------------
 let currentTime = moment();
-
-
 let todayDate = currentTime.format("DD-MM-YY")
 let day = moment().format("dddd")
 let tomorrowDate = moment().add(1, "days").format("DD-MM-YY")
@@ -16,7 +14,7 @@ let dayAddFour = moment().add(4,"days").format("dddd")
 let dateAddFive = moment().add(5,"days").format("DD-MM-YY")
 let dayAddFive = moment().add(5,"days").format("dddd")
 
-
+let cityName = "Birmingham,GB"
 
 $("#today").text(todayDate)
 $("#tomorrow").text(tomorrowDate)
@@ -31,26 +29,32 @@ $("#dateAddFive").text(dateAddFive)
 $("#dayAddFive").text(dayAddFive)
 
 
-
-
-
-
-
-
 // Saves the city the user has input into local storage ----------------------
-function saveValue() {
-    let searchHistory = ["Birmingham", "Coventry"];
-localStorage.setItem("City", JSON.stringify(searchHistory))
-let cityData = $("search").val()
 
-searchHistory= localStorage.getItem("City")
-console.log(searchHistory)
+$("#searchForCity").click(searchForCity)
+function searchForCity(e) {
+    console.log("button clicked")
+    e.preventDefault();
+    cityName = $("#search").val()
+    localStorage.setItem("UserSearch", cityName)
+    console.log(cityName)
+    getLongLat()
 }
 
-        if (localStorage.getItem("city") == null){
-        localStorage.setItem("city", "[]")
 
-    // }
+       
+    
+//        let searchHistory = ["Birmingham", "Coventry"];
+// localStorage.setItem("City", JSON.stringify(searchHistory))
+
+// searchHistory= localStorage.getItem("City")
+// console.log(searchHistory)
+// }
+
+//         if (localStorage.getItem("city") == null){
+//         localStorage.setItem("city", "[]")
+//         }
+    
     // searchHistory = JSON.parse(localStorage.getItem("city"))
     //     let cityData = $("#search").val()
     //     searchHistory.push(cityData)
@@ -62,24 +66,6 @@ console.log(searchHistory)
 
 
 
-
-  
-}
-
-
-
-let cityName = "London"
-
-
-
-// To do
-// Turn the local storage into an array that is then displayed under the search 
-// Pull the information from the API into the weather boxes
-// on click or enter of search, the user is interpolated into the api web address 
-// how to get the five day 
-// Get the text input from the search and save it to local storage 
-
-
 // Get the lat long data and store in local storage 
 async function getLongLat() {
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
@@ -89,9 +75,11 @@ async function getLongLat() {
     let lon = data.city.coord.lon
     localStorage.setItem("lat", lat)
     localStorage.setItem("lon", lon)
-    console.log(data)
+    $("#cityName").text(data.city.name + ", " + data.city.country)
+       console.log(data)
     }
-getLongLat()
+
+
 
 let cityLat = localStorage.getItem("lat")
 let cityLon = localStorage.getItem("lon")
@@ -106,6 +94,7 @@ async function getUV() {
     console.log(data)
     let uvi = data.current.uvi
     $("#UV").text(uvi)
+    // Change color depending on UVI---------------------------------
     if ( uvi <= 2) {
         $("#UV").addClass("favorable")
     } else if (uvi <= 5) {
@@ -115,9 +104,8 @@ async function getUV() {
     console.log(data.current.uvi)
     }
 }
-    // Favorable = 0 - 2
-    // Moderate = 3 - 5
-    // Sever = 5 above  
+
+
 
 getUV()
 

@@ -27,17 +27,14 @@
         <div class="box d-flex">
           <p> Search for a city</p>
           <form>
-          <input id="search" placeholder="Enter a city" type="text" value="">
-          <input type="button" value="search" id="searchForCity">
+          <input id="search" type="text" value="Birmingham,GB">
+          <button type="button" value="search" id="searchForCity" onclick=saveValue()"> Search </button>
           </form>
 
         </div>
-        <p> City list</p>
-        <p> City list</p>
-        <p> City list</p>
-        <p> City list</p>
-        <p> City list</p>
-        <p> City list</p>
+        <div id="searchList">
+                </div>
+      
       </div>
 
       <!-- Today's weather box -->
@@ -59,88 +56,92 @@
 
         <!-- Weather Day -->
         <div class="row">
-          <!-- Day 1 -->
-          <div class="col col-12 col-md-3 col-lg-2 card-body">
-            <h2 id="tomorrowday"></h2>
-            <h2 id="tomorrow"> </h2>
-            <ul class="list">
-              <li>
-                <div><img id="1wicon" src="" alt="Weather icon"></div>
-              </li>
-              <li><ins id="1descript"></ins></li>
-              <li>Temperature: <ins id="1temp"></ins> &#176C</li>
-              <li>Humidity: <ins id="1humid"></ins></li>
-              <li>Wind Speed: <ins id="1ws"></ins> MPH</li>
-            
-            </ul>
-          </div>
+     <!-- Day 1 -->
+     <div class="col col-12 col-md-3 col-lg-2 card-body">
+      <h2 id="tomorrowday"></h2>
+      <h2 id="tomorrow"> </h2>
+      <ul class="list">
+        <li>
+          <div><img id="1wicon" src="" alt="Weather icon"></div>
+        </li>
+        <li><ins id="1descript"></ins></li>
+        <li>Temperature: <ins id="1temp"></ins> &#176C</li>
+        <li>Humidity: <ins id="1humid"></ins></li>
+        <li>Wind Speed: <ins id="1ws"></ins> MPH</li>
+      
+      </ul>
+    </div>
 
-          <!-- Day 2 -->
-          <div class="col col-12 col-md-3 col-lg-2 card-body">
-            <h2 id="dayAddTwo"></h2>
-            <h2 id="dateAddTwo"> </h2>
-            <ul class="list">
-              <li>
-                <div><img id="2wicon" src="" alt="Weather icon"></div>
-              </li>
-              <li><ins id="2descript"></ins></li>
-              <li>Temperature: <ins id="2temp"></ins> &#176C</li>
-              <li>Humidity: <ins id="2humid"></ins></li>
-              <li>Wind Speed: <ins id="2ws"></ins> MPH</li>
-              
-            </ul>
-          </div>
+    <!-- Day 2 -->
+    <div class="col col-12 col-md-3 col-lg-2 card-body">
+      <h2 id="dayAddTwo"></h2>
+      <h2 id="dateAddTwo"> </h2>
+      <ul class="list">
+        <li>
+          <div><img id="2wicon" src="" alt="Weather icon"></div>
+        </li>
+        <li><ins id="2descript"></ins></li>
+        <li>Temperature: <ins id="2temp"></ins> &#176C</li>
+        <li>Humidity: <ins id="2humid"></ins></li>
+        <li>Wind Speed: <ins id="2ws"></ins> MPH</li>
+        
+      </ul>
+    </div>
 
 
-          <!-- Day 3 -->
-          <div class="col col-12 col-md-3 col-lg-2 card-body">
-            <h2 id="dayAddThree"></h2>
-            <h2 id="dateAddThree"> </h2>
-            <ul class="list">
-              <li>
-                <div><img id="3wicon" src="" alt="Weather icon"></div>
-              </li>
-              <li><ins id="3descript"></ins></li>
-              <li>Temperature: <ins id="3temp"></ins> &#176C</li>
-              <li>Humidity: <ins id="3humid"></ins></li>
-              <li>Wind Speed: <ins id="3ws"></ins> MPH</li>
-            
-            </ul>
-          </div>
+    <!-- Day 3 -->
+    <div class="col col-12 col-md-3 col-lg-2 card-body">
+      <h2 id="dayAddThree"></h2>
+      <h2 id="dateAddThree"> </h2>
+      <ul class="list">
+        <li>
+          <div><img id="3wicon" src="" alt="Weather icon"></div>
+        </li>
+        <li><ins id="3descript"></ins></li>
+        <li>Temperature: <ins id="3temp"></ins> &#176C</li>
+        <li>Humidity: <ins id="3humid"></ins></li>
+        <li>Wind Speed: <ins id="3ws"></ins> MPH</li>
+      
+      </ul>
+    </div>
 
-          <!-- Day 4 -->
-          <div class="col col-12 col-md-3 col-lg-2 card-body">
-            <h2 id="dayAddFour"></h2>
-            <h2 id="dateAddFour"> </h2>
-            <ul class="list">
-              <li>
-                <div><img id="4wicon" src="" alt="Weather icon"></div>
-              </li>
-              <li><ins id="4descript"></ins></li>
-              <li>Temperature: <ins id="4temp"></ins> &#176C</li>
-              <li>Humidity: <ins id="4humid"></ins></li>
-              <li>Wind Speed: <ins id="4ws"></ins> MPH</li>
-           
-            </ul>
-          </div>
+    <!-- Day 4 -->
+    <div class="col col-12 col-md-3 col-lg-2 card-body">
+      <h2 id="dayAddFour"></h2>
+      <h2 id="dateAddFour"> </h2>
+      <ul class="list">
+        <li>
+          <div><img id="4wicon" src="" alt="Weather icon"></div>
+        </li>
+        <li><ins id="4descript"></ins></li>
+        <li>Temperature: <ins id="4temp"></ins> &#176C</li>
+        <li>Humidity: <ins id="4humid"></ins></li>
+        <li>Wind Speed: <ins id="4ws"></ins> MPH</li>
+     
+      </ul>
+    </div>
 
-          <!-- Day 5 -->
-          <div class="col col-12 col-md-3 col-lg-2 card-body">
-            <h2 id="dayAddFive"></h2>
-            <h2 id="dateAddFive"> </h2>
-            <ul class="list">
-              <li>
-                <div><img id="5wicon" src="" alt="Weather icon"></div>
-              </li>
-              <li><ins id="5descript"></ins></li>
-              <li>Temperature: <ins id="5temp"></ins> &#176C</li>
-              <li>Humidity: <ins id="5humid"></ins></li>
-              <li>Wind Speed: <ins id="5ws"></ins> MPH</li>
-           
-            </ul>
-          </div>
+    <!-- Day 5 -->
+    <div class="col col-12 col-md-3 col-lg-2 card-body">
+      <h2 id="dayAddFive"></h2>
+      <h2 id="dateAddFive"> </h2>
+      <ul class="list">
+        <li>
+          <div><img id="5wicon" src="" alt="Weather icon"></div>
+        </li>
+        <li><ins id="5descript"></ins></li>
+        <li>Temperature: <ins id="5temp"></ins> &#176C</li>
+        <li>Humidity: <ins id="5humid"></ins></li>
+        <li>Wind Speed: <ins id="5ws"></ins> MPH</li>
+     
+      </ul>
+    </div>
+
+
+
 
         </div>
+
       </div>
     </div>
 

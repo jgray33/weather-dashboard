@@ -28,6 +28,13 @@ function searchForCity(e) {
   getLongLat();
   getUV();
   $("#searchList").append(`<p> ${cityName}</p>`)
+  getTodayWeather()
+getTomorrowWeather()
+getDayThreeWeather()
+getDayFourWeather()
+getDayFiveWeather()
+getDaySixWeather()
+
 }
 
 // Get the lat long data and store in local storage
@@ -74,11 +81,10 @@ async function getUV() {
   }
 }
 
-let cityName = "Birmingham,GB"
-
 // Rendering forecast --------------------------------------------
 
 async function getTodayWeather() {
+  let cityName = $("#search:text").val()
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
     const response = await fetch(requestUrl)
     const data = await response.json()
@@ -188,12 +194,6 @@ async function getDaySixWeather() {
     $("#5ws").text(windSpeed)
 }
 
-getTodayWeather()
-getTomorrowWeather()
-getDayThreeWeather()
-getDayFourWeather()
-getDayFiveWeather()
-getDaySixWeather()
 
 
 

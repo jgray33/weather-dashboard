@@ -27,16 +27,24 @@ $("#dayAddFour").text(dayAddFour)
 $("#dateAddFive").text(dateAddFive)
 $("#dayAddFive").text(dayAddFive)
 
-let cityName = "london"
+
+
+$(document ).ready(function windowLoad() {
+    cityName = "Birmingham,GB"
+    getLongLat()
+    getUV()
+})
+
 
 // Saves the city the user has input into local storage ----------------------
 $("#searchForCity").click(searchForCity)
 function searchForCity(e) {
     console.log("button clicked")
     e.preventDefault();
-    cityName = $("#search").val()
-    localStorage.setItem("UserSearch", cityName)
+    cityName = $("#search:text").val()
     console.log(cityName)
+    localStorage.setItem("UserSearch", cityName)
+    $("#searchForCity").val("")
     getLongLat()
     getUV()
 }
@@ -44,7 +52,6 @@ function searchForCity(e) {
        
 // Get the lat long data and store in local storage 
 async function getLongLat() {
-    let cityName = localStorage.getItem("UserSearch")
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
     const response = await fetch(requestUrl)
     const data = await response.json()
@@ -84,122 +91,130 @@ async function getUV() {
     }
 }
 
-async function getTodayWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[0].dt_txt)
-    let iconcode = (data.list[0].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[0].weather[0].description
-    let temperature = (Math.floor(data.list[0].main.temp))
-    let humidity = data.list[0].main.humidity
-    let windSpeed = data.list[0].wind.speed
-    $("#0wicon").attr("src", iconUrl)
-    $("#0descript").text(weatherDescription)
-    $("#0temp").text(temperature) 
-    $("#0humid").text(humidity) 
-    $("#0ws").text(windSpeed)
-}
+// async function getTodayWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[0].dt_txt)
+
+//     let iconcode = (data.list[0].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[0].weather[0].description
+//     let temperature = (Math.floor(data.list[0].main.temp))
+//     let humidity = data.list[0].main.humidity
+//     let windSpeed = data.list[0].wind.speed
+//     $("#0wicon").attr("src", iconUrl)
+//     $("#0descript").text(weatherDescription)
+//     $("#0temp").text(temperature) 
+//     $("#0humid").text(humidity) 
+//     $("#0ws").text(windSpeed)
+// }
      
-async function getTomorrowWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[8].dt_txt)
-    let iconcode = (data.list[8].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[8].weather[0].description
-    let temperature = (Math.floor(data.list[8].main.temp))
-    let humidity = data.list[8].main.humidity
-    let windSpeed = data.list[8].wind.speed
-    $("#1wicon").attr("src", iconUrl)
-    $("#1descript").text(weatherDescription)
-    $("#1temp").text(temperature) 
-    $("#1humid").text(humidity) 
-    $("#1ws").text(windSpeed)
-}
+// async function getTomorrowWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[8].dt_txt)
+//     let iconcode = (data.list[8].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[8].weather[0].description
+//     let temperature = (Math.floor(data.list[8].main.temp))
+//     let humidity = data.list[8].main.humidity
+//     let windSpeed = data.list[8].wind.speed
+//     $("#1wicon").attr("src", iconUrl)
+//     $("#1descript").text(weatherDescription)
+//     $("#1temp").text(temperature) 
+//     $("#1humid").text(humidity) 
+//     $("#1ws").text(windSpeed)
+// }
 
-async function getDayThreeWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[16].dt_txt)
-    let iconcode = (data.list[16].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[16].weather[0].description
-    let temperature = (Math.floor(data.list[16].main.temp))
-    let humidity = data.list[16].main.humidity
-    let windSpeed = data.list[16].wind.speed
-    $("#2wicon").attr("src", iconUrl)
-    $("#2descript").text(weatherDescription)
-    $("#2temp").text(temperature) 
-    $("#2humid").text(humidity) 
-    $("#2ws").text(windSpeed)
-}
+// async function getDayThreeWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[16].dt_txt)
+//     let iconcode = (data.list[16].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[16].weather[0].description
+//     let temperature = (Math.floor(data.list[16].main.temp))
+//     let humidity = data.list[16].main.humidity
+//     let windSpeed = data.list[16].wind.speed
+//     $("#2wicon").attr("src", iconUrl)
+//     $("#2descript").text(weatherDescription)
+//     $("#2temp").text(temperature) 
+//     $("#2humid").text(humidity) 
+//     $("#2ws").text(windSpeed)
+// }
 
-async function getDayFourWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[24].dt_txt)
-    let iconcode = (data.list[24].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[24].weather[0].description
-    let temperature = (Math.floor(data.list[24].main.temp))
-    let humidity = data.list[24].main.humidity
-    let windSpeed = data.list[24].wind.speed
-    $("#3wicon").attr("src", iconUrl)
-    $("#3descript").text(weatherDescription)
-    $("#3temp").text(temperature) 
-    $("#3humid").text(humidity) 
-    $("#3ws").text(windSpeed)
-}
+// async function getDayFourWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[24].dt_txt)
+//     let iconcode = (data.list[24].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[24].weather[0].description
+//     let temperature = (Math.floor(data.list[24].main.temp))
+//     let humidity = data.list[24].main.humidity
+//     let windSpeed = data.list[24].wind.speed
+//     $("#3wicon").attr("src", iconUrl)
+//     $("#3descript").text(weatherDescription)
+//     $("#3temp").text(temperature) 
+//     $("#3humid").text(humidity) 
+//     $("#3ws").text(windSpeed)
+// }
 
-async function getDayFiveWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[32].dt_txt)
-    let iconcode = (data.list[32].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[32].weather[0].description
-    let temperature = (Math.floor(data.list[32].main.temp))
-    let humidity = data.list[32].main.humidity
-    let windSpeed = data.list[32].wind.speed
-    $("#4wicon").attr("src", iconUrl)
-    $("#4descript").text(weatherDescription)
-    $("#4temp").text(temperature) 
-    $("#4humid").text(humidity) 
-    $("#4ws").text(windSpeed)
-    console.log(windSpeed)
-}
+// async function getDayFiveWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[32].dt_txt)
+//     let iconcode = (data.list[32].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[32].weather[0].description
+//     let temperature = (Math.floor(data.list[32].main.temp))
+//     let humidity = data.list[32].main.humidity
+//     let windSpeed = data.list[32].wind.speed
+//     $("#4wicon").attr("src", iconUrl)
+//     $("#4descript").text(weatherDescription)
+//     $("#4temp").text(temperature) 
+//     $("#4humid").text(humidity) 
+//     $("#4ws").text(windSpeed)
+//     console.log(windSpeed)
+// }
 
 
-async function getDaySixWeather() {
-    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
-    const response = await fetch(requestUrl)
-    const data = await response.json()
-    console.log(data.list[39].dt_txt)
-    let iconcode = (data.list[39].weather[0].icon)
-    let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
-    let weatherDescription = data.list[39].weather[0].description
-    let temperature = (Math.floor(data.list[39].main.temp))
-    let humidity = data.list[39].main.humidity
-    let windSpeed = data.list[39].wind.speed
-    $("#5wicon").attr("src", iconUrl)
-    $("#5descript").text(weatherDescription)
-    $("#5temp").text(temperature) 
-    $("#5humid").text(humidity) 
-    $("#5ws").text(windSpeed)
-}
+// async function getDaySixWeather() {
+//     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`
+//     const response = await fetch(requestUrl)
+//     const data = await response.json()
+//     console.log(data.list[39].dt_txt)
+//     let iconcode = (data.list[39].weather[0].icon)
+//     let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`
+//     let weatherDescription = data.list[39].weather[0].description
+//     let temperature = (Math.floor(data.list[39].main.temp))
+//     let humidity = data.list[39].main.humidity
+//     let windSpeed = data.list[39].wind.speed
+//     $("#5wicon").attr("src", iconUrl)
+//     $("#5descript").text(weatherDescription)
+//     $("#5temp").text(temperature) 
+//     $("#5humid").text(humidity) 
+//     $("#5ws").text(windSpeed)
+// }
 
-getTodayWeather()
-getTomorrowWeather()
-getDayThreeWeather()
-getDayFourWeather()
-getDayFiveWeather()
-getDaySixWeather()
+// getTodayWeather()
+// getTomorrowWeather()
+// getDayThreeWeather()
+// getDayFourWeather()
+// getDayFiveWeather()
+// getDaySixWeather()
+
+
+
+
+// function getApi() {
+//     let requestUrl = 
+// }
 
 
 

@@ -22,7 +22,8 @@ Click [here](https://jgray33.github.io/weather-dashboard/) to go to my finished 
 
 ### Screenshot
 
-Here is what the project looks like: 
+Here is what the project looks like: ![weather-app screenshop](https://user-images.githubusercontent.com/95051960/152251997-585eacee-76da-47b4-a946-a135fd173e4a.png)
+
 
 ## Links 
 - Repository  https://github.com/jgray33/weather-dashboard

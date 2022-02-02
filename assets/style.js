@@ -7,42 +7,67 @@ let cityLat
 let cityLon
 
 
-// Loads default data as Birmingham, GB -------------------------------------
-$(document).ready(function windowLoad() {
-  $("#today").text(todayDate);
-  cityName = "Birmingham,GB";
-  localStorage.setItem("lat", 52.4814);
-  localStorage.setItem("lon", -1.8998);
-  renderTodayWeather();
-  renderUV();
-});
+// // Loads default data as Birmingham, GB -------------------------------------
+// $(document).ready(function windowLoad() {
+//   $("#today").text(todayDate);
+//   cityName = "Birmingham,GB";
+//   localStorage.setItem("lat", 52.4814);
+//   localStorage.setItem("lon", -1.8998);
+//   renderTodayWeather();
+//   renderUV();
+// });
 
 
-// Saves the city the user has input into local storage ----------------------
-$("#searchForCity").click(searchForCity);
-function searchForCity(e) {
-  e.preventDefault();
-  cityName = $("#search:text").val();
-  localStorage.setItem("userSearch", cityName);
+// function searchForCity(e) {
+//   e.preventDefault();
+//   cityName = $("#search:text").val();
+//   localStorage.setItem("userSearch", cityName);
+//   getLongLat()
+//   renderTodayWeather();
+//   renderUV();
+//   
+// }
+
+
+
+// Saving data into local storage as an array------------------------------------- 
+function save() {
+    //Get the data from the user's search  
+  let new_data = $("input").val();
+    if (localStorage.getItem("cityList") == null) {
+    localStorage.setItem("cityList", "[]")
+  }
+    let old_list = JSON.parse(localStorage.getItem("cityList"))
+  old_list.push(new_data)
+  localStorage.setItem("cityList", JSON.stringify(old_list))
+  let userCityList = JSON.parse(localStorage.getItem("cityList"))
+   console.log(userCityList)
+
+  for (let i = 0; i < userCityList.length; i++) {
+    
+    $("#searchList").append(`<li> ${userCityList[i]} </li>`)
+    console.log(userCityList[i])
+      }   
   getLongLat()
-  renderTodayWeather();
-  renderUV();
-  $("#searchList").append(`<p> ${cityName}</p>`);
-}
+  }
+
 
 async function getLongLat(){
-  cityName = localStorage.getItem("userSearch")
+  let cityName = $("#input").val()
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
   localStorage.setItem("lat", data.city.coord.lat);
   localStorage.setItem("lon", data.city.coord.lon);
   console.log(localStorage.getItem("lat"))
+  renderTodayWeather()
+  renderUV()
+  getApi(1)
 }
 
 // Load today's ----------------------------------------------------
 async function renderTodayWeather() {
-  cityName = localStorage.getItem("userSearch")
+  let cityName = $("#input").val()
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
@@ -56,6 +81,7 @@ async function renderTodayWeather() {
   $("#humid").text(data.list[0].main.humidity);
   $("#ws").text(data.list[0].wind.speed);
   $("#descript").text(data.list[0].weather[0].description.toUpperCase());
+  
 }
 
 // Get UV data -----------------------------------------------------------------
@@ -80,7 +106,7 @@ async function renderUV() {
     }
 }
 
-getApi(1)
+
 
 let weatherCards = $(".weather-card");
 async function getApi(i) {

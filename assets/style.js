@@ -7,7 +7,8 @@ let cityLat;
 let cityLon;
 
 $(document).on("click", "#citySearch", () => {
-  console.log(this.event.target.value, "this is the city i want");
+  console.log("clicked");
+  getLongLat(this.event.target.value);
 });
 
 loadHistory();
@@ -24,20 +25,32 @@ function save() {
   localStorage.setItem("cityList", JSON.stringify(old_list));
   let userCityList = JSON.parse(localStorage.getItem("cityList"));
   console.log(userCityList);
-  $("#searchList").append(`<li><button id='citySearch' value=${new_data} > ${new_data} </button></li>`);
+  $("#searchList").append(
+    `<li><button id="citySearch" value=${new_data}> ${new_data} </button></li>`
+  );
   getLongLat();
 }
 
-// Loads the search history on load ----------------------------------------
+// Loads the search history on load --------------------------------------------------
 function loadHistory() {
-  let userCityList = JSON.parse(localStorage.getItem("cityList"));
-  for (let i = 0; i < userCityList.length; i++) {
-    $("#searchList").append(
-      `<li><button onclick=getLongLat()>  ${userCityList[i]} </button></li>`
-    );
-  }
+  if (localStorage.getItem("cityList") == null) {
+    $("#input").val("Birmingham,GB");
+    getLongLat();
+
+  } else {
+    let userCityList = JSON.parse(localStorage.getItem("cityList"));
+    for (let i = 0; i < userCityList.length; i++) {
+      // Adds the user's search to the search list
+      $("#searchList").append(
+        `<li><button>  ${userCityList[i]} </button></li>`
+      );
+    }
+    $("#input").val("Birmingham,GB");
+    getLongLat();
+    }
 }
 
+// Gets the data to attain the city's latitude and long --------------------------------
 async function getLongLat() {
   let cityName = $("#input").val();
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
@@ -50,7 +63,7 @@ async function getLongLat() {
   getApi(lat, lon);
 }
 
-// Load today's ----------------------------------------------------
+// Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {
   $("#cityName").text(data.city.name + ", " + data.city.country);
   console.log(data);
@@ -63,12 +76,11 @@ async function renderTodayWeather(data) {
   $("#descript").text(data.list[0].weather[0].description.toUpperCase());
 }
 
+// Loads the forecast data and renders the cards -------------------------------------
 async function getApi(cityLat, cityLon) {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=f7709e138c9db02bf881e5c64600209b&units=metric`;
   const response = await fetch(requestUrl);
   const data = await response.json();
-  console.log(data, "forecast");
-
   const forecast = 6;
   // Render cards ---------------------------------------------
   for (let i = 1; i < forecast; i++) {
@@ -78,6 +90,7 @@ async function getApi(cityLat, cityLon) {
     const forecastYear = forecastDate.getFullYear();
     const forecastDateText =
       forecastDay + "/" + forecastMonth + "/" + forecastYear;
+    // Dynamically creates the card ------------------------------------------
     var output = `
     <div class="col-md6>
     <div class="card" style="width: 18rem;">
@@ -91,12 +104,11 @@ async function getApi(cityLat, cityLon) {
     </div>
   </div>
   </div>`;
-
     $(".weather-card").append(output);
   }
+  // Change color depending on UVI---------------------------------
   let uvi = data.current.uvi;
   $("#UV").text(uvi);
-  // Change color depending on UVI---------------------------------
   if (uvi <= 2) {
     $("#UV").addClass("favorable");
   } else if (uvi <= 5) {

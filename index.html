@@ -10,8 +10,7 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js">    </script>
   <link rel="stylesheet" href="assets/style.css">
 
-  <title> Weather
-  </title>
+  <title> Weather dashboard </title>
 </head>
 
 <body>
@@ -19,24 +18,21 @@
   <!-- Title -->
   <div class="container">
     <div class="row"> Weather app</div>
-    <div class="row">
 
-      <!-- Search Box -->
+    <!-- Search Box -->
+    <div class="row">
       <div class="col col-sm-2 col-12">
         <div class="box d-flex">
           <p> Search for a city</p>
           <div>
-            <input id="input" placeholder="city names"/>
-          <button onclick="save()"> Save</button>
+            <input id="input" placeholder="city names" />
+            <button onclick="save()"> Save</button>
           </div>
-          
-                 
-
         </div>
-        
-
       </div>
-      <div id="searchList">  </div>
+
+      <!-- Search list -->
+      <div id="searchList"> </div>
 
       <!-- Today's weather box -->
       <div class="col col-sm-10 col-12">
@@ -53,28 +49,16 @@
           <li>Wind Speed: <ins id="ws"></ins> MPH</li>
           <li><ins id="UV"></ins> </li>
         </ul>
-
-
-
-        <!-- Weather Day -->
-        <div class="row weather-card" >
-       
-          <!-- commented it out so we can create this dynamically in javascript-->
-          <!-- <div class="col col-12 col-md-3 col-lg-2 card-body weather-card"> </div>
-          <div class="col col-12 col-md-3 col-lg-2 card-body weather-card"> </div>
-          <div class="col col-12 col-md-3 col-lg-2 card-body weather-card"> </div>
-          <div class="col col-12 col-md-3 col-lg-2 card-body weather-card"> </div>
-          <div class="col col-12 col-md-3 col-lg-2 card-body weather-card"> </div> -->
-        </div>
-
       </div>
+
+
+      <!-- Forecast box -->
+      <div class="row weather-card"></div>
+
     </div>
-
-
   </div>
   </div>
-
-
+  </div>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

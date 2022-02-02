@@ -4,20 +4,16 @@
 
 .card-body{
     font-size: 10em;
+    background-color: green;
 }
-
-
 
 ins {
     text-decoration: none;
   }
 
-
-
 li{
    list-style: none; 
 }
-
 
 .box {
     display: flex;
@@ -26,6 +22,7 @@ li{
     width: 100px;
     margin: auto;
     padding-top: 5px;
+    background-color: hotpink;
 }
 
 .favorable{
@@ -42,7 +39,19 @@ li{
     color: white
 }
 
-
 .weather-card {
     font-size: 10px;
+    background-color: indigo;
+}
+
+.container {
+    background-color: khaki;
+}
+
+.row {
+    background-color: grey;
+}
+
+.col {
+    background-color: hotpink;
 }

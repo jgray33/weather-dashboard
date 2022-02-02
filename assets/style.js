@@ -1,18 +1,20 @@
-// Time ---------------------
+// Elements ------------------------------------------------------------
 let currentTime = moment();
 let todayDate = currentTime.format("DD-MM-YY");
 let day = moment().format("dddd");
 let cityName;
+let cityLat
+let cityLon
 
-$("#today").text(todayDate);
 
 // Loads default data as Birmingham, GB -------------------------------------
 $(document).ready(function windowLoad() {
+  $("#today").text(todayDate);
   cityName = "Birmingham,GB";
   localStorage.setItem("lat", 52.4814);
   localStorage.setItem("lon", -1.8998);
-  getTodayWeather();
-  getUV();
+  renderTodayWeather();
+  renderUV();
 });
 
 
@@ -21,22 +23,30 @@ $("#searchForCity").click(searchForCity);
 function searchForCity(e) {
   e.preventDefault();
   cityName = $("#search:text").val();
-  localStorage.setItem("UserSearch", cityName);
-  getTodayWeather();
-  getUV();
+  localStorage.setItem("userSearch", cityName);
+  getLongLat()
+  renderTodayWeather();
+  renderUV();
   $("#searchList").append(`<p> ${cityName}</p>`);
 }
 
-
-// Get the lat long data and store in local storage ------------------
-async function getTodayWeather() {
-  cityName =$("#search").val()
+async function getLongLat(){
+  cityName = localStorage.getItem("userSearch")
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
   localStorage.setItem("lat", data.city.coord.lat);
   localStorage.setItem("lon", data.city.coord.lon);
-  //   Render the data into the html ----------------------------------
+  console.log(localStorage.getItem("lat"))
+}
+
+// Load today's ----------------------------------------------------
+async function renderTodayWeather() {
+  cityName = localStorage.getItem("userSearch")
+  let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
+  const response = await fetch(requestUrl);
+  const data = await response.json();
+   //   Render the data into the html ----------------------------------
   $("#cityName").text(data.city.name + ", " + data.city.country);
   console.log(data);
   let iconcode = data.list[0].weather[0].icon;
@@ -49,9 +59,11 @@ async function getTodayWeather() {
 }
 
 // Get UV data -----------------------------------------------------------------
-async function getUV() {
+async function renderUV() {
   let cityLat = localStorage.getItem("lat");
   let cityLon = localStorage.getItem("lon");
+  console.log(cityLat)
+  console.log(cityLon)
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=f7709e138c9db02bf881e5c64600209b`;
   const response = await fetch(requestUrl);
   const data = await response.json();

@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js">    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css">
 
   <title> Weather dashboard </title>
@@ -17,28 +18,31 @@
 
   <!-- Title -->
   <div class="container">
-    <div class="row"> Weather app</div>
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1 w-100 text-center">Weather Dashboard</span>
+  </nav>
 
   <!-- Search Box -->
     <div class="row">
       <div class="col col-sm-2 col-12">
-        <div class="box d-flex">
-          <p> Search for a city</p>
+        <div class="box d-flex id="search-for"">
+          <p><b> Search for a city</b></p>
           <div>
             <input id="input" placeholder="city names" />
-            <button onclick="save()"> Search</button>
-<br>
+            <button type="button" onclick="save()"> Search</button>
+            
+ <!-- Search list -->
             <div id="searchList"> </div>
           </div>
         </div>
       </div>
 
-  <!-- Search list -->
+ 
   <div class="col md-12">
       
 
   <!-- Today's weather box -->
-      <div class="col col-sm-10 col-12">
+      <div class="col col-sm-10 col-12 today-weather">
         <br>
         <ul class="list">
           <li><ins id="cityName"> </ins> </li>
@@ -47,9 +51,9 @@
             <div><img id="wicon" src="" alt="Weather icon"></div>
           </li>
           <li><ins id="descript"></ins></li>
-          <li>Temperature: <ins id="temp"></ins> &#176C</li>
-          <li>Humidity: <ins id="humid"></ins></li>
-          <li>Wind Speed: <ins id="ws"></ins> MPH</li>
+          <li><b>Temperature:</b> <ins id="temp"></ins> &#176C</li>
+          <li><b>Humidity: </b> <ins id="humid"></ins></li>
+          <li><b>Wind Speed: </b><ins id="ws"></ins> MPH</li>
           <li><ins id="UV"></ins> </li>
         </ul>
       </div>

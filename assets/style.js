@@ -26,7 +26,7 @@ function save() {
   let userCityList = JSON.parse(localStorage.getItem("cityList"));
   console.log(userCityList);
   $("#searchList").append(
-    `<li><button id="citySearch" value=${new_data}> ${new_data} </button></li>`
+    `<li><button id="citySearch btn btn-outline-primary" value=${new_data}> ${new_data} </button></li>`
   );
   getLongLat();
 }
@@ -85,22 +85,24 @@ async function getApi(cityLat, cityLon) {
   // Render cards ---------------------------------------------
   for (let i = 1; i < forecast; i++) {
     const forecastDate = new Date(data.daily[i].dt * 1000);
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    let day = weekday[forecastDate.getDay()]
     const forecastDay = forecastDate.getDate();
-    const forecastMonth = forecastDate.getMonth();
+    const forecastMonth = forecastDate.getMonth()+1;
     const forecastYear = forecastDate.getFullYear();
-    const forecastDateText =
-      forecastDay + "/" + forecastMonth + "/" + forecastYear;
+    const forecastDateText = forecastDay + "/" + forecastMonth + "/" + forecastYear;
     // Dynamically creates the card ------------------------------------------
     var output = `
     <div class="col-md6>
-    <div class="card" style="width: 18rem;">
-    <img src="https://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">${forecastDate}</h5>
+    <div class="card" style="width: 15rem">
+        <div class="card-body">
+        <img src="https://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png" class="card-img-top" alt="weather icon" style="width:50%; height:50%">
+      <h5 class="card-title">${day}</h5>
+      <h5 class="card-title">${forecastDateText}</h5>
       <div class="card-text">
-      <p>Temperature: ${data.daily[i].temp.day}</p>
-      <p> Humidity: ${data.daily[i].humidity}</p>
-      <p> Wind Speed: ${data.daily[i].wind_speed}</p></div>
+      <p><b>Temperature:</b> ${data.daily[i].temp.day}</p>
+      <p><b> Humidity:</b> ${data.daily[i].humidity}</p>
+      <p><b> Wind Speed:</b> ${data.daily[i].wind_speed}</p></div>
     </div>
   </div>
   </div>`;

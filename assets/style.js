@@ -7,28 +7,6 @@ let cityLat
 let cityLon
 
 
-// // Loads default data as Birmingham, GB -------------------------------------
-// $(document).ready(function windowLoad() {
-//   $("#today").text(todayDate);
-//   cityName = "Birmingham,GB";
-//   localStorage.setItem("lat", 52.4814);
-//   localStorage.setItem("lon", -1.8998);
-//   renderTodayWeather();
-//   renderUV();
-// });
-
-
-// function searchForCity(e) {
-//   e.preventDefault();
-//   cityName = $("#search:text").val();
-//   localStorage.setItem("userSearch", cityName);
-//   getLongLat()
-//   renderTodayWeather();
-//   renderUV();
-//   
-// }
-
-
 
 // Saving data into local storage as an array------------------------------------- 
 function save() {
@@ -45,11 +23,21 @@ function save() {
 
   for (let i = 0; i < userCityList.length; i++) {
     
-    $("#searchList").append(`<li> ${userCityList[i]} </li>`)
+    $("#searchList").append(`<li><button onclick=save()>  ${userCityList[i]} </button></li>`)
     console.log(userCityList[i])
       }   
   getLongLat()
   }
+
+  loadHistory()
+  
+  // Loads the search history on load ----------------------------------------
+  function loadHistory() {
+    let userCityList = JSON.parse(localStorage.getItem("cityList"))
+     for (let i = 0; i < userCityList.length; i++) {
+        $("#searchList").append(`<li><button onclick=getLongLat()>  ${userCityList[i]} </button></li>`)
+    }}
+
 
 
 async function getLongLat(){
@@ -62,8 +50,7 @@ async function getLongLat(){
   console.log(localStorage.getItem("lat"))
   renderTodayWeather()
   renderUV()
-  getApi(1)
-}
+  }
 
 // Load today's ----------------------------------------------------
 async function renderTodayWeather() {

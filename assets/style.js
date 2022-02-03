@@ -83,6 +83,7 @@ async function getApi(cityLat, cityLon) {
   const data = await response.json();
   const forecast = 6;
   // Render cards ---------------------------------------------
+  $(".weather-card").html("")
   for (let i = 1; i < forecast; i++) {
     const forecastDate = new Date(data.daily[i].dt * 1000);
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]

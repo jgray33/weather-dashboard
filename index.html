@@ -26,13 +26,13 @@
     <div class="row">
       <div class="col col-sm-2 col-12">
         <div class="box d-flex id="search-for"">
-          <p><b> Search for a city</b></p>
-          <div>
+          <h2> Search for a city</h2>
+                    <div id="search-box">
             <input id="input" placeholder="city names" />
-            <button type="button" onclick="save()"> Search</button>
+            <button id="search-bttn" type="button" onclick="save()"> Search</button>
             
  <!-- Search list -->
-            <div id="searchList"> </div>
+            <div id="searchList"> <h2>Search history </h2></div>
           </div>
         </div>
       </div>
@@ -45,8 +45,8 @@
       <div class="col col-sm-10 col-12 today-weather">
         <br>
         <ul class="list">
-          <li><ins id="cityName"> </ins> </li>
-          <li> Today <br> <ins id="today"></ins></li>
+          <li><ins id="cityName"> </ins></li>
+          <li><h2> Today</h2> <br> <ins id="today"></ins></li>
           <li>
             <div><img id="wicon" src="" alt="Weather icon"></div>
           </li>

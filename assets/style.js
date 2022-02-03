@@ -6,7 +6,7 @@ let cityName;
 let cityLat;
 let cityLon;
 
-$(document).on("click", "#citySearch", () => {
+$(document).on("click", $("#citySearch"), () => {
   console.log("clicked");
   getLongLat(this.event.target.value);
 });
@@ -106,7 +106,8 @@ async function getApi(cityLat, cityLon) {
     </div>
   </div>
   </div>`;
-    $(".weather-card").append(output);
+      $(".weather-card").append(output);
+
   }
   // Change color depending on UVI---------------------------------
   let uvi = data.current.uvi;

@@ -40,7 +40,7 @@ function loadHistory() {
     for (let i = 0; i < userCityList.length; i++) {
       // Adds the user's search to the search list
       $("#searchList").append(
-        `<li><button class="btn btn-outline citySearch" value="${userCityList}}">  ${userCityList[i]} </button></li>`
+        `<li><button class="btn btn-outline citySearch" value="${userCityList[i]}">  ${userCityList[i]} </button></li>`
       );
     }
     $("#input").val("Birmingham,GB");

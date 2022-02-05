@@ -24,7 +24,7 @@ function save() {
   let userCityList = JSON.parse(localStorage.getItem("cityList"));
   console.log(userCityList);
   $("#searchList").append(
-    `<li><button class= "btn btn-outline citySearch" value=${new_data}> ${new_data} </button></li>`
+    `<li><button class= "btn btn-outline citySearch" value="${new_data}"> ${new_data} </button></li>`
   );
   getLongLat();
 }
@@ -40,7 +40,7 @@ function loadHistory() {
     for (let i = 0; i < userCityList.length; i++) {
       // Adds the user's search to the search list
       $("#searchList").append(
-        `<li><button>  ${userCityList[i]} </button></li>`
+        `<li><button class="btn btn-outline citySearch" value="${userCityList}}">  ${userCityList[i]} </button></li>`
       );
     }
     $("#input").val("Birmingham,GB");
@@ -61,9 +61,10 @@ async function getLongLat() {
   getApi(lat, lon);
 }
 
-$(".citySearch").on("click", () => {
-  console.log("clicked");
-  getLongLat(this.event.target.value);
+$(".citySearch").on("click", event => {
+  $("#input").val("")
+  $("#input").val(event.target.value)
+  getLongLat();
 });
 
 

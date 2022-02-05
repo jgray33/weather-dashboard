@@ -6,12 +6,10 @@ let cityName;
 let cityLat;
 let cityLon;
 
-$(document).on("click", $("#citySearch"), () => {
-  console.log("clicked");
-  getLongLat(this.event.target.value);
-});
 
 loadHistory();
+$("#search-bttn").click(save())
+
 
 // Saving data into local storage as an array-------------------------------------
 function save() {
@@ -26,7 +24,7 @@ function save() {
   let userCityList = JSON.parse(localStorage.getItem("cityList"));
   console.log(userCityList);
   $("#searchList").append(
-    `<li><button id="citySearch btn btn-outline-primary" value=${new_data}> ${new_data} </button></li>`
+    `<li><button class= "btn btn-outline citySearch" value=${new_data}> ${new_data} </button></li>`
   );
   getLongLat();
 }
@@ -62,6 +60,12 @@ async function getLongLat() {
   renderTodayWeather(data);
   getApi(lat, lon);
 }
+
+$(".citySearch").on("click", () => {
+  console.log("clicked");
+  getLongLat(this.event.target.value);
+});
+
 
 // Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {

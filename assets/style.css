@@ -56,10 +56,6 @@ li{
     margin-bottom: 10%;
 }
 
-button:hover {
-    background-color: grey;
-    color: white;
-  }
   
 button {
     background-color: white;

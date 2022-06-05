@@ -1,4 +1,4 @@
-// Elements ------------------------------------------------------------
+// Elements -----------------------------------------------------------------------
 let currentTime = moment();
 let todayDate = currentTime.format("DD-MM-YY");
 let day = moment().format("dddd");
@@ -7,9 +7,24 @@ let cityLat;
 let cityLon;
 
 
+// On opening of page, load the search history ------------------------------------
 loadHistory();
-$("#search-bttn").click(save())
 
+// Search on pressing Enter or on clicking search ----------------------------------
+$("#search-bttn").click(save());
+
+$("#input").keydown(function (event) {
+  if (event.which == 13) {
+    console.log("Clicked enter");
+    const query = $("#input").val();
+    if (query == "") {
+      console.log("nothing entered");
+      showModal();
+    } else {
+      save(query);
+    }
+  }
+});
 
 // Saving data into local storage as an array-------------------------------------
 function save() {
@@ -24,32 +39,40 @@ function save() {
   let userCityList = JSON.parse(localStorage.getItem("cityList"));
   console.log(userCityList);
   $("#searchList").append(
-    `<li><button class= "btn btn-outline citySearch" value="${new_data}"> ${new_data} </button></li>`
+    `<button class= "btn btn-outline citySearch" value="${new_data}"> ${new_data} </button>`
   );
   getLongLat();
 }
 
 // Loads the search history on load --------------------------------------------------
 function loadHistory() {
-  if (localStorage.getItem("cityList") == null) {
-    $("#input").val("Birmingham,GB");
-    getLongLat();
+  if ($("input").val("")) {
+    $("input").val("Birmingham, GB")
+    console.log("nothing searched load history")
+    return
+  }
 
-  } else {
+
+  // On the first load of the page, load Birmingham's weather as default
+  if (localStorage.getItem("cityList") == null) {
+    $("#input").val("Birmingham, GB");
+    console.log("there is nothing in local storage");
+  }
+
+  // Get the search history from local storage
+  else {
     let userCityList = JSON.parse(localStorage.getItem("cityList"));
     for (let i = 0; i < userCityList.length; i++) {
       // Adds the user's search to the search list
       $("#searchList").append(
-        `<li><button class="btn btn-outline citySearch" value="${userCityList[i]}">  ${userCityList[i]} </button></li>`
+        `<button class="btn btn-outline citySearch" value="${userCityList[i]}">  ${userCityList[i]} </button>`
       );
     }
-    $("#input").val("Birmingham,GB");
-    getLongLat();
-    }
+  }
 }
 
 // Gets the data to attain the city's latitude and long --------------------------------
-async function getLongLat() {
+async function getLongLat(startCityName) {
   let cityName = $("#input").val();
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
@@ -61,12 +84,13 @@ async function getLongLat() {
   getApi(lat, lon);
 }
 
-$(".citySearch").on("click", event => {
-  $("#input").val("")
-  $("#input").val(event.target.value)
+// Enable search on click in the search history
+$(".citySearch").on("click", (event) => {
+  $("#input").val("");
+  $("#input").val(this.event.target.value);
   getLongLat();
+  $("#input").val("");
 });
-
 
 // Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {
@@ -88,32 +112,46 @@ async function getApi(cityLat, cityLon) {
   const data = await response.json();
   const forecast = 6;
   // Render cards ---------------------------------------------
-  $(".weather-card").html("")
+  $(".weather-card").html("");
   for (let i = 1; i < forecast; i++) {
     const forecastDate = new Date(data.daily[i].dt * 1000);
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-    let day = weekday[forecastDate.getDay()]
+    const weekday = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    let day = weekday[forecastDate.getDay()];
     const forecastDay = forecastDate.getDate();
-    const forecastMonth = forecastDate.getMonth()+1;
+    const forecastMonth = forecastDate.getMonth() + 1;
     const forecastYear = forecastDate.getFullYear();
-    const forecastDateText = forecastDay + "/" + forecastMonth + "/" + forecastYear;
+    const forecastDateText =
+      forecastDay + "/" + forecastMonth + "/" + forecastYear;
     // Dynamically creates the card ------------------------------------------
     var output = `
-    <div class="col-md6>
-    <div class="card" style="width: 15rem">
-        <div class="card-body">
-        <img src="https://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png" class="card-img-top" alt="weather icon" style="width:50%; height:50%">
-      <h5 class="card-title">${day}</h5>
-      <h5 class="card-title">${forecastDateText}</h5>
-      <div class="card-text">
-      <p><b>Temperature:</b> ${data.daily[i].temp.day}</p>
-      <p><b> Humidity:</b> ${data.daily[i].humidity}</p>
-      <p><b> Wind Speed:</b> ${data.daily[i].wind_speed}</p></div>
+    <div class="col rendered-cards"> 
+    <div class="row"> 
+    <div class="col rendered-date">
+    <h5><b>${day}</b></h5>
+    <p>${forecastDateText}<p>
     </div>
-  </div>
-  </div>`;
-      $(".weather-card").append(output);
+    <div class ="col">   
+      <img class="weather-icon" src="https://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png" alt="weather icon">
+      </div>
+    </div>
+    <hr>
+      <div class="row">
+      <p><b>Temperature:</b> ${data.daily[i].temp.day} &#176C</p>
+      <p><b> Humidity:</b> ${data.daily[i].humidity} %</p>
+      <p><b> Wind Speed:</b> ${data.daily[i].wind_speed} MPH</p>
+      </div>
+    </div>
 
+`;
+    $(".weather-card").append(output);
   }
   // Change color depending on UVI---------------------------------
   let uvi = data.current.uvi;
@@ -126,3 +164,14 @@ async function getApi(cityLat, cityLon) {
     $("#UV").addClass("severe");
   }
 }
+
+function showModal() {
+  console.log("modal to appear");
+}
+
+// Go through the search history and if it's the same as input don't add to local storage
+// for (let i = 0; i < old_list.length; i++) {
+//   if (new_data === old_list[i]) {
+//     console.log("There's a repeat")
+//     return
+//   }

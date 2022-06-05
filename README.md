@@ -1,6 +1,6 @@
 # Weather APP
 
-Created a weather application that shows the user a five day forecast in a city of their choosing. 
+A weather application that shows the user a five day forecast in a city of their choosing. 
 
 ## Access the finished project
 

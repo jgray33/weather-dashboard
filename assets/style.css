@@ -1,81 +1,95 @@
+:root {
+  --darkgreen: #648381;
+  --light-green: rgb(229, 235, 234);
+  --pink: #ddb8a6;
+}
+
 * {
-    font-size: 12px;
-    font-family: "lato";
+  font-family: "lato";
+  box-sizing: border-box;
 }
 
-.card-body{
-    font-size: 10em;
-    color: black;
-    border: solid black 1px;
+ul {
+  list-style-type: none;
+  margin: 10%;
+   text-decoration: none;
 }
-
 
 ins {
-    text-decoration: none;
+  text-decoration: none;
   }
 
-li{
-   list-style: none; 
-   padding-top: 1%;
-   }
+.today-weather li{
+  margin-top: 2%;
+  font-size: 20px;
 
-.box {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    margin: auto;
-    padding-top: 5px;
-    align-items: flex-start;
-    margin-bottom: 5%;
-    
-    }
-
-
-
-
-
-    /* Nav bar */
-.navbar-brand {
-    font-size: 30px;      
 }
 
-.navbar{
-    margin-bottom: 1%;
-    }
-
-/* Today weather box */
-.today-weather {
-    margin: auto;
-    border: solid black 1px;
-    margin-bottom: 1%;
+.header {
+  text-align: center;
+  background-color: var(--darkgreen);
+  color: white;
+  font-weight: bold;
+  margin-bottom: 1%;
 }
 
-
-/* Buttons */
-#search-bttn{
-    margin-bottom: 10%;
+.today-weather-box {
+  margin-bottom: 1%;
 }
 
-  
-button {
-    background-color: white;
-    color: black;
-    border: 2px solid #e7e7e7;
-  }
-  
+.search-box {
+  background-color: var(--light-green);
+  margin-bottom: 1%;
+}
+
+.rendered-cards {
+  background-color: var(--light-green);
+  margin-right: 1%;
+}
+
+.rendered-date{
+  margin-top: 10%;
+
+}
+
+.weather-icon{
+  width:  105%
+}
 
 /* UV styling */
 
-  .favorable{
-    background-color: green;
-    color: white;
+.favorable {
+  background-color: green;
+  color: white;
 }
 
 .moderate {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 .severe {
-    background-color: red;
-    color: white
+  background-color: red;
+  color: white;
+}
+
+
+/* Image resizing  */
+.icon-container {
+  width: 200px;
+  height: 250px;
+}
+
+/* Resize images */
+.icon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#wicon{
+  height: 50%;
+  width: 50%;
+  margin-left: 35%;
+  margin-top: 40%;
 }

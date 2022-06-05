@@ -6,9 +6,11 @@ let cityName;
 let cityLat;
 let cityLon;
 
-
 // On opening of page, load the search history ------------------------------------
-loadHistory();
+window.onload = function () {
+  loadHistory();
+  getLongLat("Birmingham, GB");
+};
 
 // Search on pressing Enter or on clicking search ----------------------------------
 $("#search-bttn").click(save());
@@ -36,48 +38,33 @@ function save() {
   let old_list = JSON.parse(localStorage.getItem("cityList"));
   old_list.push(new_data);
   localStorage.setItem("cityList", JSON.stringify(old_list));
-  let userCityList = JSON.parse(localStorage.getItem("cityList"));
-  console.log(userCityList);
-  $("#searchList").append(
-    `<button class= "btn btn-outline citySearch" value="${new_data}"> ${new_data} </button>`
-  );
-  getLongLat();
-}
+  loadHistory()
+  }
 
 // Loads the search history on load --------------------------------------------------
 function loadHistory() {
-  if ($("input").val("")) {
-    $("input").val("Birmingham, GB")
-    console.log("nothing searched load history")
-    return
-  }
-
-
-  // On the first load of the page, load Birmingham's weather as default
-  if (localStorage.getItem("cityList") == null) {
-    $("#input").val("Birmingham, GB");
-    console.log("there is nothing in local storage");
-  }
-
+  $("#searchList").html("")
   // Get the search history from local storage
-  else {
-    let userCityList = JSON.parse(localStorage.getItem("cityList"));
-    for (let i = 0; i < userCityList.length; i++) {
-      // Adds the user's search to the search list
-      $("#searchList").append(
-        `<button class="btn btn-outline citySearch" value="${userCityList[i]}">  ${userCityList[i]} </button>`
-      );
-    }
+  let userCityList = JSON.parse(localStorage.getItem("cityList"));
+  // Filter out the empty searches
+  let filteredList = userCityList.filter(e => e)
+  let noRepeats = [...new Set(filteredList)]
+    for (let i = 0; i < noRepeats.length; i++) {   
+    // Adds the user's search to the search list
+    $("#searchList").append(
+      `<li><button class="btn btn-outline citySearch" value="${noRepeats[i]}">  ${noRepeats[i]} </button></li>`
+    );
   }
+  getLongLat()
 }
 
+
 // Gets the data to attain the city's latitude and long --------------------------------
-async function getLongLat(startCityName) {
+async function getLongLat() {
   let cityName = $("#input").val();
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
-  console.log(data);
   const lat = data.city.coord.lat;
   const lon = data.city.coord.lon;
   renderTodayWeather(data);
@@ -86,11 +73,16 @@ async function getLongLat(startCityName) {
 
 // Enable search on click in the search history
 $(".citySearch").on("click", (event) => {
-  $("#input").val("");
   $("#input").val(this.event.target.value);
   getLongLat();
   $("#input").val("");
 });
+
+// Function to search to city when clicked
+const searchLocationClicked = (event) => {
+  const search = event.currentTarget.getAttribute("data-search");
+  getLongLat(search);
+};
 
 // Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {

@@ -1,28 +1,23 @@
-# Weather APP
+# Weather Dashboard
 
-A weather application that shows the user a five day forecast in a city of their choosing. 
+A weather application that shows the user a five day forecast in a city of their choosing. Built using server-side APIs the application makes a request with specific parameters to a third-party API. The application is then dynamically updated using the data received. Local storage is utilised to store persistent data. 
+
 
 ## Access the finished project
 
 Click [here](https://jgray33.github.io/weather-dashboard/) to go to my finished project
 
-## Criteria my finished project met 
+## Features of this application 
 
-* GIVEN a weather dashboard with form inputs
-* WHEN I search for a city
-* THEN I am presented with current and future conditions for that city and that city is added to the search history
-* WHEN I view current weather conditions for that city
-* THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-* WHEN I view the UV index
-* THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-* WHEN I view future weather conditions for that city
-* THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-* WHEN I click on a city in the search history
-* THEN I am again presented with current and future conditions for that city
+* User can enter the name of a city into the search box, and the application will show the city's weather forecast for today and the next five days.
+* User is able to see a weather icon, day, date, temperature, humidity, and wind speed for the coming five days. 
+* The user's search is added to a search history which is saved and rendered if the user visits the site again.
+* The user is able to search for the city agin by selecting the city in the search history. 
+* The UV index is shown using a color coding: Red for severe, yellow for moderate or green for favorable.
 
-### Screenshot
+### Example
 
-Here is what the project looks like: ![weather-app screenshop](https://user-images.githubusercontent.com/95051960/152251997-585eacee-76da-47b4-a946-a135fd173e4a.png)
+![weather-app screenshot](/weather-dashboard/assets/images/Weather%20dashboard.gif)
 
 
 ## Links 

@@ -18,10 +18,8 @@ $("#search-bttn").click(save());
 
 $("#input").keydown(function (event) {
   if (event.which == 13) {
-    console.log("Clicked enter");
     const query = $("#input").val();
     if (query == "") {
-      console.log("nothing entered");
       modalAppear()
     } else {
       save(query);
@@ -67,7 +65,6 @@ async function getLongLat() {
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
-  console.log(data)
   if (data.message === "city not found"){
     modalAppear()
   }
@@ -81,7 +78,6 @@ async function getLongLat() {
 
 // Search for city once clicked  ------------------------------------------------------
 $(document).on("click", $("#citySearch"), (event) => {
-  console.log("clicked", event.target.value);
   $("#input").val(event.target.value);
   getLongLat();
 });

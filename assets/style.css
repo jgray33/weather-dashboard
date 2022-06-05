@@ -93,3 +93,17 @@ ins {
   margin-left: 35%;
   margin-top: 40%;
 }
+
+.searchList{
+  list-style: none;
+  margin-bottom: 1%;
+}
+
+.button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    outline: inherit;
+    cursor: pointer;
+  }

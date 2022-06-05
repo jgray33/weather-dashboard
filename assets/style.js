@@ -9,7 +9,8 @@ let cityLon;
 // On opening of page, load the search history ------------------------------------
 window.onload = function () {
   loadHistory();
-  getLongLat("Birmingham, GB");
+  $("#input").val("Birmingham, GB");
+  getLongLat();
 };
 
 // Search on pressing Enter or on clicking search ----------------------------------
@@ -52,7 +53,7 @@ function loadHistory() {
     for (let i = 0; i < noRepeats.length; i++) {   
     // Adds the user's search to the search list
     $("#searchList").append(
-      `<li><button class="btn btn-outline citySearch" value="${noRepeats[i]}">  ${noRepeats[i]} </button></li>`
+      `<li class="searchList"><button class="button citySearch" value="${noRepeats[i]}"> <i class="fas fa-search"></i> ${noRepeats[i]}   </button></li>`
     );
   }
   getLongLat()
@@ -71,18 +72,14 @@ async function getLongLat() {
   getApi(lat, lon);
 }
 
-// Enable search on click in the search history
-$(".citySearch").on("click", (event) => {
-  $("#input").val(this.event.target.value);
+
+// Search for city once clicked  ------------------------------------------------------
+$(document).on("click", $("#citySearch"), (event) => {
+  console.log("clicked", event.target.value);
+  $("#input").val(event.target.value);
   getLongLat();
-  $("#input").val("");
 });
 
-// Function to search to city when clicked
-const searchLocationClicked = (event) => {
-  const search = event.currentTarget.getAttribute("data-search");
-  getLongLat(search);
-};
 
 // Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {

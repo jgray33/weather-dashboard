@@ -17,7 +17,7 @@ Click [here](https://jgray33.github.io/weather-dashboard/) to go to my finished 
 
 ### Example
 
-![weather-app screenshot](/weather-dashboard/assets/images/Weather%20dashboard.gif)
+![Weather dashboard](https://user-images.githubusercontent.com/95051960/172059307-1847c889-9d57-43b6-9e42-69d75010505d.gif)
 
 
 ## Links 

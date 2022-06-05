@@ -13,7 +13,7 @@ window.onload = function () {
   getLongLat();
 };
 
-// Search on pressing Enter or on clicking search ----------------------------------
+// Search by pressing Enter or on clicking search ----------------------------------
 $("#search-bttn").click(save());
 
 $("#input").keydown(function (event) {
@@ -22,7 +22,7 @@ $("#input").keydown(function (event) {
     const query = $("#input").val();
     if (query == "") {
       console.log("nothing entered");
-      showModal();
+      modalAppear()
     } else {
       save(query);
     }
@@ -40,6 +40,7 @@ function save() {
   old_list.push(new_data);
   localStorage.setItem("cityList", JSON.stringify(old_list));
   loadHistory()
+  getLongLat()
   }
 
 // Loads the search history on load --------------------------------------------------
@@ -56,7 +57,7 @@ function loadHistory() {
       `<li class="searchList"><button class="button citySearch" value="${noRepeats[i]}"> <i class="fas fa-search"></i> ${noRepeats[i]}   </button></li>`
     );
   }
-  getLongLat()
+  
 }
 
 
@@ -66,10 +67,15 @@ async function getLongLat() {
   let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=f7709e138c9db02bf881e5c64600209b&units=metric&cnt=40`;
   const response = await fetch(requestUrl);
   const data = await response.json();
+  console.log(data)
+  if (data.message === "city not found"){
+    modalAppear()
+  }
   const lat = data.city.coord.lat;
   const lon = data.city.coord.lon;
   renderTodayWeather(data);
   getApi(lat, lon);
+  $("#input").val("")
 }
 
 
@@ -84,7 +90,6 @@ $(document).on("click", $("#citySearch"), (event) => {
 // Load today's weather data ----------------------------------------------------
 async function renderTodayWeather(data) {
   $("#cityName").text(data.city.name + ", " + data.city.country);
-  console.log(data);
   let iconcode = data.list[0].weather[0].icon;
   let iconUrl = `http://openweathermap.org/img/w/${iconcode}.png`;
   $("#wicon").attr("src", iconUrl);
@@ -154,13 +159,17 @@ async function getApi(cityLat, cityLon) {
   }
 }
 
-function showModal() {
-  console.log("modal to appear");
-}
+// Modal --------------------------------------------------------------------
 
-// Go through the search history and if it's the same as input don't add to local storage
-// for (let i = 0; i < old_list.length; i++) {
-//   if (new_data === old_list[i]) {
-//     console.log("There's a repeat")
-//     return
-//   }
+const modalAppear = () => {
+  $(".myModal-container").addClass("show")
+  $(".myModal").addClass("show")
+};
+
+const modalDisappear =  () => {
+  $(".myModal-container").removeClass("show")
+  $(".myModal").removeClass("show")
+};
+
+
+$("#cancel-btn").click(modalDisappear)
